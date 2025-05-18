@@ -49,13 +49,9 @@ Approach:
 7. Grouped the result by user id and name, then sorted it by estimated CLV in descending order.
 
 
-
-
 Note
 - All queries were written and tested in MySQL.
 - Queries are optimized for clarity and maintainability with proper aliasing and conditional logic.
-
-
 
 
 Challenges Faced:
