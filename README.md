@@ -54,7 +54,8 @@ Note
 - Queries are optimized for clarity and maintainability with proper aliasing and conditional logic.
 
 
-Challenges Faced During the Assessment:
+Challenges Faced:
+
 While working through this assessment, I encountered a few notable challenges, particularly during the setup phase and data import process. Below are the key issues:
 
 1. While importing the schema and initializing the tables, I encountered errors due to missing referenced tables. The plans_plan, user_customuser, and withdrawals_withdrawal tables included foreign key constraints referencing other tables (plans_currency, managed_portfolio_portfolioholdings, plans_planpreset, funds_usdindex, withdrawals_withdrawalintent, ) that were not yet created or not available in the provided schema.
