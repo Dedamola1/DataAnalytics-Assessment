@@ -4,8 +4,6 @@ This repository contains solutions to SQL-based data analysis tasks performed on
 
 Assessment Question 1: High-Value Customers with Multiple Products
 
-Task: Write a query to find customers with at least one funded savings plan AND one funded investment plan, sorted by total deposits.
-
 Approach:
 1. Joined users_customuser, plans_plan, and savings_savingsaccount tables using owner_id and plan_id to gather user and plan data.
 2. Filtered out deleted or archived plans.
@@ -19,8 +17,6 @@ Approach:
 
 Assessment Question 2: Transaction Frequency Analysis
 
-Task: Calculate the average number of transactions per customer per month and categorize them by High Frequency (≥10 transactions/month), Medium Frequency (3-9 transactions/month), and Low Frequency (≤2 transactions/month)
-
 Approach:
 1. Using two subqueries;
    The first subquery calculated the monthly transaction count per customer by grouping on owner_id, and month (DATE_FORMAT(transaction_date, '%Y-%m')), then
@@ -31,8 +27,6 @@ Approach:
 
 
 Assessment Question 3: Account Inactivity Alert
-
-Task: Find all active accounts (savings or investments) with no transactions in the last 1 year (365 days).
 
 Approach:
 1. Used a LEFT JOIN between plans_plan and savings_savingsaccount tables to retain accounts with no transactions. Joined both tables using id and plan_id and ensured transaction_status was filtered to only “success”.
@@ -45,8 +39,6 @@ Approach:
 
 Assessment Question 4: Customer Lifetime Value (CLV) Estimation
 
-Task: Estimate the Customer Lifetime Value based on account tenure and transaction volume, assuming the profit_per_transaction is 0.1% of the transaction value.
-
 Approach:
 1. Joined users_customuser with savings_savingsaccount using id and owner_id  to collect transaction history. Also ensured transaction_status was filtered to only “success”.
 2. Used CONCAT function for the first_name and last_name to identify the user’s full name.
@@ -57,10 +49,19 @@ Approach:
 7. Grouped the result by user id and name, then sorted it by estimated CLV in descending order.
 
 
-Notes
+Note
 - All queries were written and tested in MySQL.
 - Queries are optimized for clarity and maintainability with proper aliasing and conditional logic.
 
 
-Challenges Faced
-- 
+Challenges Faced During the Assessment:
+While working through this assessment, I encountered a few notable challenges, particularly during the setup phase and data import process. Below are the key issues:
+
+1. While importing the schema and initializing the tables, I encountered errors due to missing referenced tables. The plans_plan, user_customuser, and withdrawals_withdrawal tables included foreign key constraints referencing other tables (plans_currency, managed_portfolio_portfolioholdings, plans_planpreset, funds_usdindex, withdrawals_withdrawalintent, ) that were not yet created or not available in the provided schema.
+These constraints were causing MySQL to block the table creation, because it requires referenced tables to exist before the constraints are applied. Since these related tables weren't needed for the assessment and were not available in the dataset, I decided to remove the constraints temporarily to allow the tables to be created and populated successfully.
+
+2. I had to clean the data to ensure default values or NULL were used where appropriate, and date formats were correctly parsed to avoid discrepancies and erros when querying the tables.
+
+3. Due to the removal of foreign key constraints, I had to be extra cautious while writing JOIN queries to ensure data integrity and relationship accuracy. 
+
+ 
